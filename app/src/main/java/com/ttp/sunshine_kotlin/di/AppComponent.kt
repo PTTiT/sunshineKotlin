@@ -1,6 +1,5 @@
 package com.ttp.sunshine_kotlin.di
 
-import android.app.Application
 import com.ttp.sunshine_kotlin.SunshineKotlinApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -16,7 +15,7 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun application(application: Application): Builder
+        fun application(application: SunshineKotlinApplication): Builder
 
         fun build(): AppComponent
     }

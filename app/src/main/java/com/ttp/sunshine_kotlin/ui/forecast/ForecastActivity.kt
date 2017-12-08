@@ -1,4 +1,4 @@
-package com.ttp.sunshine_kotlin.ui.list
+package com.ttp.sunshine_kotlin.ui.forecast
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -40,8 +40,8 @@ class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnI
 
         val mForecastViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ForecastViewModel::class.java)
 
-        mForecastViewModel.mWeatherForecast.observe(this, Observer<List<WeatherEntry>> { weatherForecast ->
-            weatherForecast?.let {
+        mForecastViewModel.mWeatherForecast.observe(this, Observer<Array<WeatherEntry>> { weatherForecast ->
+            weatherForecast?.asList()?.let {
                 mForecastAdapter.swapForecast(it)
                 mForecastAdapter.notifyDataSetChanged()
             }

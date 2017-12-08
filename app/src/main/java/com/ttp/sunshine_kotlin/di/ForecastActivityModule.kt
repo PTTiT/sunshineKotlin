@@ -1,6 +1,6 @@
 package com.ttp.sunshine_kotlin.di
 
-import com.ttp.sunshine_kotlin.ui.list.ForecastActivity
+import com.ttp.sunshine_kotlin.ui.forecast.ForecastActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

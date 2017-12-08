@@ -1,4 +1,4 @@
-package com.ttp.sunshine_kotlin.ui.list
+package com.ttp.sunshine_kotlin.ui.forecast
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

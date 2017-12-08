@@ -1,4 +1,4 @@
-package com.ttp.sunshine_kotlin.ui.list
+package com.ttp.sunshine_kotlin.ui.forecast
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

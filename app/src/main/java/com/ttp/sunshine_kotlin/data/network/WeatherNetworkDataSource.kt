@@ -27,7 +27,7 @@ class WeatherNetworkDataSource(weatherApi: WeatherApi) {
     val LOG_TAG: String? = WeatherNetworkDataSource::class.simpleName
     //    var mContext: Context = context
     var mWeatherApi: WeatherApi = weatherApi
-    var mWeatherForecast: MutableLiveData<List<WeatherEntry>> = MutableLiveData()
+    var mWeatherForecast: MutableLiveData<Array<WeatherEntry>> = MutableLiveData()
 
     fun fetchWeather() {
         Log.d(LOG_TAG, "Fetch weather started")
@@ -37,7 +37,7 @@ class WeatherNetworkDataSource(weatherApi: WeatherApi) {
             }
 
             override fun onResponse(call: Call<WeatherResponse>?, response: Response<WeatherResponse>?) {
-                mWeatherForecast.postValue(response?.body()?.mWeatherForecast?.asList())
+                mWeatherForecast.postValue(response?.body()?.mWeatherForecast)
             }
         })
     }

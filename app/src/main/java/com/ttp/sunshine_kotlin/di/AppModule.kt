@@ -1,10 +1,14 @@
 package com.ttp.sunshine_kotlin.di
 
+import android.arch.persistence.room.Room
+import android.content.Context
+import com.ttp.sunshine_kotlin.SunshineKotlinApplication
 import com.ttp.sunshine_kotlin.data.SunshineRepository
+import com.ttp.sunshine_kotlin.data.db.SunshineDatabase
 import com.ttp.sunshine_kotlin.data.network.WeatherApi
 import com.ttp.sunshine_kotlin.data.network.WeatherConverterFactory
 import com.ttp.sunshine_kotlin.data.network.WeatherNetworkDataSource
-import com.ttp.sunshine_kotlin.ui.list.ForecastViewModelFactory
+import com.ttp.sunshine_kotlin.ui.forecast.ForecastViewModelFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -18,6 +22,10 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
+    fun provideContext(application: SunshineKotlinApplication): Context = application.applicationContext!!
+
+    @Singleton
+    @Provides
     fun provideNetworkApi(): WeatherApi = Retrofit.Builder()
             .baseUrl(WeatherApi.BASE_URL).addConverterFactory(WeatherConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
@@ -26,11 +34,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun proviceNetworkDataSource(weatherApi: WeatherApi): WeatherNetworkDataSource = WeatherNetworkDataSource(weatherApi)
+    fun provideSunshineDatabase(context: Context): SunshineDatabase = Room.databaseBuilder(context, SunshineDatabase::class.java, SunshineDatabase.DATABASE_NAME).build()
 
     @Singleton
     @Provides
-    fun provideSunshineRepository(networkDataSource: WeatherNetworkDataSource): SunshineRepository = SunshineRepository(networkDataSource)
+    fun provideNetworkDataSource(weatherApi: WeatherApi): WeatherNetworkDataSource = WeatherNetworkDataSource(weatherApi)
+
+    @Singleton
+    @Provides
+    fun provideSunshineRepository(networkDataSource: WeatherNetworkDataSource, sunshineDatabase: SunshineDatabase): SunshineRepository = SunshineRepository(networkDataSource, sunshineDatabase.sunshineDao())
 
     @Singleton
     @Provides
