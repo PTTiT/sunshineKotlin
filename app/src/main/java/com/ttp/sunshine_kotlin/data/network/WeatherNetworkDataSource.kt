@@ -10,7 +10,7 @@ import retrofit2.Response
 /**
  * Created by Franz on 11/28/2017.
  */
-class WeatherNetworkDataSource private constructor(weatherApi: WeatherApi) {
+class WeatherNetworkDataSource(weatherApi: WeatherApi) {
     companion object {
         val NUM_DAYS: Int = 14
         val LOCATION: String = "Mountain View, CA"

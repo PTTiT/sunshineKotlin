@@ -6,6 +6,6 @@ import com.ttp.sunshine_kotlin.data.SunshineRepository
 /**
  * Created by Franz on 11/30/2017.
  */
-class ForecastActivityViewModel(mSunshineRepository: SunshineRepository) : ViewModel() {
+class ForecastViewModel(mSunshineRepository: SunshineRepository) : ViewModel() {
     var mWeatherForecast = mSunshineRepository.getWeatherForecast()
 }

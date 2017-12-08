@@ -10,14 +10,16 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.ttp.sunshine_kotlin.R
 import com.ttp.sunshine_kotlin.data.db.WeatherEntry
-import com.ttp.sunshine_kotlin.utilities.InjectorUtils
 import java.util.*
+import javax.inject.Inject
 
 class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnItemClickHandler {
-    var mForecastAdapter: ForecastAdapter? = null
+    private lateinit var mForecastAdapter: ForecastAdapter
     var mRecycleView: RecyclerView? = null
     var mProgressBar: ProgressBar? = null
-    var mForecastActivityViewModel: ForecastActivityViewModel? = null
+
+    @Inject
+    lateinit var mViewModelFactory: ForecastViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +28,22 @@ class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnI
         mRecycleView = findViewById(R.id.recyclerview_forecast)
         mProgressBar = findViewById(R.id.pb_loading_indicator)
 
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mRecycleView!!.layoutManager = layoutManager
-        mRecycleView!!.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
 
         mForecastAdapter = ForecastAdapter(this, this)
-        mRecycleView!!.adapter = mForecastAdapter
+        mRecycleView?.apply {
+            layoutManager = linearLayoutManager
+            setHasFixedSize(true)
+            adapter = mForecastAdapter
+        }
 
-        val viewModelFactory = InjectorUtils.provideMainActivityViewModelFactory()
-        mForecastActivityViewModel = ViewModelProviders.of(this, viewModelFactory).get(ForecastActivityViewModel::class.java)
+        val mForecastViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ForecastViewModel::class.java)
 
-        mForecastActivityViewModel!!.mWeatherForecast.observe(this, Observer<List<WeatherEntry>> { weatherForecast ->
-            run {
-                mForecastAdapter?.swapForecast(weatherForecast!!)
-                mForecastAdapter?.notifyDataSetChanged()
+        mForecastViewModel.mWeatherForecast.observe(this, Observer<List<WeatherEntry>> { weatherForecast ->
+            weatherForecast?.let {
+                mForecastAdapter.swapForecast(it)
+                mForecastAdapter.notifyDataSetChanged()
             }
         })
     }
