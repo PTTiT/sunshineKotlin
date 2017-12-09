@@ -8,11 +8,14 @@ import com.ttp.sunshine_kotlin.data.db.SunshineDatabase
 import com.ttp.sunshine_kotlin.data.network.WeatherApi
 import com.ttp.sunshine_kotlin.data.network.WeatherConverterFactory
 import com.ttp.sunshine_kotlin.data.network.WeatherNetworkDataSource
+import com.ttp.sunshine_kotlin.ui.detail.DetailActivity
+import com.ttp.sunshine_kotlin.ui.detail.DetailViewModelFactory
 import com.ttp.sunshine_kotlin.ui.forecast.ForecastViewModelFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 /**
@@ -42,9 +45,17 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSunshineRepository(networkDataSource: WeatherNetworkDataSource, sunshineDatabase: SunshineDatabase): SunshineRepository = SunshineRepository(networkDataSource, sunshineDatabase.sunshineDao())
+    fun provideSunshineRepository(networkDataSource: WeatherNetworkDataSource, sunshineDatabase: SunshineDatabase): SunshineRepository = SunshineRepository(networkDataSource, sunshineDatabase.weatherDao())
 
     @Singleton
     @Provides
     fun provideForecastViewModelFactory(sunshineRepository: SunshineRepository): ForecastViewModelFactory = ForecastViewModelFactory(sunshineRepository)
+
+//    @Provides
+//    @DetailActivity.ExtraTimestamp
+//    fun provideDate(detailActivity: DetailActivity): Date = Date(detailActivity.getExtraTimestamp())
+
+    @Singleton
+    @Provides
+    fun provideDetailViewModelFactory(sunshineRepository: SunshineRepository): DetailViewModelFactory = DetailViewModelFactory(sunshineRepository)
 }

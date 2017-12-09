@@ -16,5 +16,5 @@ abstract class SunshineDatabase : RoomDatabase() {
         const val DATABASE_VERSION: Int = 1
     }
 
-    abstract fun sunshineDao(): SunshineDao
+    abstract fun weatherDao(): WeatherDao
 }

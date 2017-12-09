@@ -11,7 +11,7 @@ import java.util.*
  * Created by Franz on 12/8/2017.
  */
 @Dao
-interface SunshineDao {
+interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entries: Array<WeatherEntry>)
 
@@ -20,4 +20,10 @@ interface SunshineDao {
 
     @Query("DELETE FROM weather WHERE date < :date")
     fun deleteOldData(date: Date)
+
+    @Query("SELECT count(id) FROM weather where date >= :date")
+    fun countAllFutureForecast(date: Date): Int
+
+    @Query("SELECT * FROM weather WHERE date = :date")
+    fun getWeatherByDate(date: Date): LiveData<WeatherEntry>
 }

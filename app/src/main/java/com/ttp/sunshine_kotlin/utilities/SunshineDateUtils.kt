@@ -71,6 +71,7 @@ class SunshineDateUtils {
             }
         }
 
+        @JvmStatic
         fun getFriendlyDateString(context: Context, normalizedUtcMidnight: Long, showFullDate: Boolean): String {
 
             /*

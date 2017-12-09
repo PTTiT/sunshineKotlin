@@ -2,6 +2,7 @@ package com.ttp.sunshine_kotlin.ui.forecast
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -10,13 +11,14 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.ttp.sunshine_kotlin.R
 import com.ttp.sunshine_kotlin.data.db.WeatherEntry
+import com.ttp.sunshine_kotlin.ui.detail.DetailActivity
 import java.util.*
 import javax.inject.Inject
 
 class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnItemClickHandler {
     private lateinit var mForecastAdapter: ForecastAdapter
-    var mRecycleView: RecyclerView? = null
-    var mProgressBar: ProgressBar? = null
+    private var mRecycleView: RecyclerView? = null
+    private var mProgressBar: ProgressBar? = null
 
     @Inject
     lateinit var mViewModelFactory: ForecastViewModelFactory
@@ -38,9 +40,9 @@ class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnI
             adapter = mForecastAdapter
         }
 
-        val mForecastViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ForecastViewModel::class.java)
+        val forecastViewModel = ViewModelProviders.of(this, mViewModelFactory).get(ForecastViewModel::class.java)
 
-        mForecastViewModel.mWeatherForecast.observe(this, Observer<Array<WeatherEntry>> { weatherForecast ->
+        forecastViewModel.mWeatherForecast.observe(this, Observer<Array<WeatherEntry>> { weatherForecast ->
             weatherForecast?.asList()?.let {
                 mForecastAdapter.swapForecast(it)
                 mForecastAdapter.notifyDataSetChanged()
@@ -49,7 +51,10 @@ class ForecastActivity : AppCompatActivity(), ForecastAdapter.ForecastAdapterOnI
     }
 
     override fun onItemClick(date: Date) {
-        Toast.makeText(this, date.toString(), Toast.LENGTH_LONG).show()
+        val timestamp = date.time
+        val detailIntent = Intent(this, DetailActivity::class.java)
+        detailIntent.putExtra(DetailActivity.EXTRA_TIMESTAMP, timestamp)
+        startActivity(detailIntent)
     }
 
 }

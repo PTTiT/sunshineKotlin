@@ -16,6 +16,7 @@
 package com.ttp.sunshine_kotlin.utilities
 
 import android.content.Context
+import android.databinding.BindingAdapter
 import android.util.Log
 
 import com.ttp.sunshine_kotlin.R

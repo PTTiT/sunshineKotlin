@@ -15,18 +15,17 @@ class WeatherNetworkDataSource(weatherApi: WeatherApi) {
         val NUM_DAYS: Int = 14
         val LOCATION: String = "Mountain View, CA"
 
-        @Volatile private var INSTANCE: WeatherNetworkDataSource? = null
-
-        fun getInstance(weatherApi: WeatherApi): WeatherNetworkDataSource =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: WeatherNetworkDataSource(weatherApi).also { INSTANCE = it }
-                }
+//        @Volatile private var INSTANCE: WeatherNetworkDataSource? = null
+//
+//        fun getInstance(weatherApi: WeatherApi): WeatherNetworkDataSource =
+//                INSTANCE ?: synchronized(this) {
+//                    INSTANCE ?: WeatherNetworkDataSource(weatherApi).also { INSTANCE = it }
+//                }
 
     }
 
     val LOG_TAG: String? = WeatherNetworkDataSource::class.simpleName
-    //    var mContext: Context = context
-    var mWeatherApi: WeatherApi = weatherApi
+    private var mWeatherApi: WeatherApi = weatherApi
     var mWeatherForecast: MutableLiveData<Array<WeatherEntry>> = MutableLiveData()
 
     fun fetchWeather() {

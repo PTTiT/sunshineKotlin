@@ -10,20 +10,20 @@ import java.lang.reflect.Type
  */
 class WeatherConverterFactory : Converter.Factory() {
     override fun responseBodyConverter(type: Type?, annotations: Array<out Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
-        return WeatherJsonConverter.getInstance()
+        return WeatherJsonConverter
     }
 
-    class WeatherJsonConverter : Converter<ResponseBody, WeatherResponse> {
-        val mParser: OpenWeatherJsonParser = OpenWeatherJsonParser()
+    object WeatherJsonConverter : Converter<ResponseBody, WeatherResponse> {
+        private val mParser: OpenWeatherJsonParser = OpenWeatherJsonParser()
 
-        companion object {
-            @Volatile private var INSTANCE: WeatherJsonConverter? = null
-
-            fun getInstance(): WeatherJsonConverter =
-                    INSTANCE ?: synchronized(this) {
-                        INSTANCE ?: WeatherJsonConverter().also { INSTANCE = it }
-                    }
-        }
+//        companion object {
+//            @Volatile private var INSTANCE: WeatherJsonConverter? = null
+//
+//            fun getInstance(): WeatherJsonConverter =
+//                    INSTANCE ?: synchronized(this) {
+//                        INSTANCE ?: WeatherJsonConverter().also { INSTANCE = it }
+//                    }
+//        }
 
         override fun convert(value: ResponseBody?): WeatherResponse? {
             return mParser.parse(value?.string())
