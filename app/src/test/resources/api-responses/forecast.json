@@ -1,0 +1,353 @@
+{
+  "city": {
+    "id": 5375480,
+    "name": "Mountain View",
+    "coord": {
+      "lon": -122.08384,
+      "lat": 37.386051
+    },
+    "country": "US",
+    "population": 0
+  },
+  "cod": "200",
+  "message": 0.0158,
+  "cnt": 14,
+  "list": [
+    {
+      "dt": 1513652555,
+      "temp": {
+        "day": 29.49,
+        "min": 10.955737721761292,
+        "max": 28.512010219991815,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1035.6019198438412,
+      "humidity": 68.30838694985906,
+      "weather": [
+        {
+          "id": 801,
+          "main": "Mostly Clear",
+          "description": "Mostly Clear",
+          "icon": "02d"
+        }
+      ],
+      "speed": 67.6610371133094,
+      "deg": 96,
+      "clouds": 20
+    },
+    {
+      "dt": 1513738955,
+      "temp": {
+        "day": 29.49,
+        "min": 15.545357847352436,
+        "max": 15.915135166331064,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1022.2458883088153,
+      "humidity": 62.57368676066041,
+      "weather": [
+        {
+          "id": 951,
+          "main": "Calm",
+          "description": "Calm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 42.2002703809513,
+      "deg": 259,
+      "clouds": 20
+    },
+    {
+      "dt": 1513825355,
+      "temp": {
+        "day": 29.49,
+        "min": 6.598060158128871,
+        "max": 16.18872603298053,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1017.0629735149337,
+      "humidity": 80.21124732308716,
+      "weather": [
+        {
+          "id": 958,
+          "main": "Gale",
+          "description": "Gale",
+          "icon": "02d"
+        }
+      ],
+      "speed": 70.26595966021415,
+      "deg": 142,
+      "clouds": 20
+    },
+    {
+      "dt": 1513911755,
+      "temp": {
+        "day": 29.49,
+        "min": 15.08075473331716,
+        "max": 29.60774111734397,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1033.4174983418206,
+      "humidity": 92.03858812935479,
+      "weather": [
+        {
+          "id": 952,
+          "main": "Light Breeze",
+          "description": "Light Breeze",
+          "icon": "02d"
+        }
+      ],
+      "speed": 84.50391202323823,
+      "deg": 188,
+      "clouds": 20
+    },
+    {
+      "dt": 1513998155,
+      "temp": {
+        "day": 29.49,
+        "min": 15.594428624917972,
+        "max": 30.65846147262534,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 968.936280057447,
+      "humidity": 91.68520745423078,
+      "weather": [
+        {
+          "id": 962,
+          "main": "Hurricane",
+          "description": "Hurricane",
+          "icon": "02d"
+        }
+      ],
+      "speed": 80.23447281349334,
+      "deg": 68,
+      "clouds": 20
+    },
+    {
+      "dt": 1514084555,
+      "temp": {
+        "day": 29.49,
+        "min": 15.343627369856465,
+        "max": 29.18837711293659,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 964.7648381061114,
+      "humidity": 56.829514281072626,
+      "weather": [
+        {
+          "id": 209,
+          "main": "Storm",
+          "description": "Storm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 64.55248360969142,
+      "deg": 236,
+      "clouds": 20
+    },
+    {
+      "dt": 1514170955,
+      "temp": {
+        "day": 29.49,
+        "min": 9.015352807342058,
+        "max": 30.103387346337172,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 951.4161713497493,
+      "humidity": 85.70393022108313,
+      "weather": [
+        {
+          "id": 316,
+          "main": "Light Rain",
+          "description": "Light Rain",
+          "icon": "02d"
+        }
+      ],
+      "speed": 83.71615268538415,
+      "deg": 353,
+      "clouds": 20
+    },
+    {
+      "dt": 1514257355,
+      "temp": {
+        "day": 29.49,
+        "min": 13.348457473948303,
+        "max": 21.962488456507725,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 955.9887027419973,
+      "humidity": 76.63988587724376,
+      "weather": [
+        {
+          "id": 207,
+          "main": "Storm",
+          "description": "Storm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 93.68046902725341,
+      "deg": 182,
+      "clouds": 20
+    },
+    {
+      "dt": 1514343755,
+      "temp": {
+        "day": 29.49,
+        "min": 15.235894706001115,
+        "max": 32.35852218581924,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1044.9641570108424,
+      "humidity": 65.22442328516894,
+      "weather": [
+        {
+          "id": 229,
+          "main": "Storm",
+          "description": "Storm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 88.44323749222417,
+      "deg": 212,
+      "clouds": 20
+    },
+    {
+      "dt": 1514430155,
+      "temp": {
+        "day": 29.49,
+        "min": 7.30719581611589,
+        "max": 30.461220358558137,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1023.5526987935084,
+      "humidity": 95.63669513061316,
+      "weather": [
+        {
+          "id": 300,
+          "main": "Light Rain",
+          "description": "Light Rain",
+          "icon": "02d"
+        }
+      ],
+      "speed": 71.23411661651588,
+      "deg": 224,
+      "clouds": 20
+    },
+    {
+      "dt": 1514516555,
+      "temp": {
+        "day": 29.49,
+        "min": 14.289333341638507,
+        "max": 21.99147710917999,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1029.5166320027145,
+      "humidity": 95.32841897602711,
+      "weather": [
+        {
+          "id": 200,
+          "main": "Storm",
+          "description": "Storm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 76.46012853839909,
+      "deg": 52,
+      "clouds": 20
+    },
+    {
+      "dt": 1514602955,
+      "temp": {
+        "day": 29.49,
+        "min": 12.459442391205387,
+        "max": 18.398376553397696,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1019.4189583108903,
+      "humidity": 52.469862670359035,
+      "weather": [
+        {
+          "id": 316,
+          "main": "Light Rain",
+          "description": "Light Rain",
+          "icon": "02d"
+        }
+      ],
+      "speed": 69.20047098598297,
+      "deg": 349,
+      "clouds": 20
+    },
+    {
+      "dt": 1514689355,
+      "temp": {
+        "day": 29.49,
+        "min": 14.212144351106408,
+        "max": 20.89890270940577,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 1012.7205932110527,
+      "humidity": 65.11971593574206,
+      "weather": [
+        {
+          "id": 960,
+          "main": "Storm",
+          "description": "Storm",
+          "icon": "02d"
+        }
+      ],
+      "speed": 43.630455985120875,
+      "deg": 149,
+      "clouds": 20
+    },
+    {
+      "dt": 1514775755,
+      "temp": {
+        "day": 29.49,
+        "min": 3.2985981385193996,
+        "max": 25.99583411850335,
+        "night": 9.52,
+        "eve": 21.09,
+        "morn": 15.42
+      },
+      "pressure": 952.1351045684964,
+      "humidity": 61.54719630388503,
+      "weather": [
+        {
+          "id": 956,
+          "main": "Strong Breeze",
+          "description": "Strong Breeze",
+          "icon": "02d"
+        }
+      ],
+      "speed": 46.662105356469844,
+      "deg": 318,
+      "clouds": 20
+    }
+  ]
+}

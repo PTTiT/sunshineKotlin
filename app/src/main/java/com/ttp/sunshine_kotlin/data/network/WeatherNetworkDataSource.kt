@@ -10,7 +10,7 @@ import retrofit2.Response
 /**
  * Created by Franz on 11/28/2017.
  */
-class WeatherNetworkDataSource(weatherApi: WeatherApi) {
+open class WeatherNetworkDataSource(weatherApi: WeatherApi) {
     companion object {
         val NUM_DAYS: Int = 14
         val LOCATION: String = "Mountain View, CA"
@@ -29,10 +29,10 @@ class WeatherNetworkDataSource(weatherApi: WeatherApi) {
     var mWeatherForecast: MutableLiveData<Array<WeatherEntry>> = MutableLiveData()
 
     fun fetchWeather() {
-        Log.d(LOG_TAG, "Fetch weather started")
+//        Log.d(LOG_TAG, "Fetch weather started")
         mWeatherApi.weatherForecast(LOCATION, NUM_DAYS).enqueue(object : Callback<WeatherResponse> {
             override fun onFailure(call: Call<WeatherResponse>?, t: Throwable?) {
-                Log.e(LOG_TAG, t?.message ?: "Server error", t)
+//                Log.e(LOG_TAG, t?.message ?: "Server error", t)
             }
 
             override fun onResponse(call: Call<WeatherResponse>?, response: Response<WeatherResponse>?) {

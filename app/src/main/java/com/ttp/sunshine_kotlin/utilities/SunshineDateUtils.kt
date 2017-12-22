@@ -12,8 +12,10 @@ import java.util.concurrent.TimeUnit
  */
 class SunshineDateUtils {
     companion object {
+        @JvmStatic
         val DAY_IN_MILLIS: Long = TimeUnit.DAYS.toMillis(1)
 
+        @JvmStatic
         fun getNormalizedUtcMsForToday(): Long {
             val nowInMillis = System.currentTimeMillis()
             val timezone = TimeZone.getDefault()
@@ -23,6 +25,7 @@ class SunshineDateUtils {
             return TimeUnit.DAYS.toMillis(daysSinceEpochLocal)
         }
 
+        @JvmStatic
         fun getNormalizedUtcDateForToday(): Date {
             return Date(getNormalizedUtcMsForToday())
         }

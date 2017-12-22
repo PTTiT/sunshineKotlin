@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.kotlin_version = '1.2.10'
     ext.support_version = "26.1.0"
     ext.constraint_layout_version = "1.1.0-beta3"
     ext.firebase_jobdispatcher_version = "0.7.0"
@@ -10,8 +10,11 @@ buildscript {
     ext.arch_version = "1.0.0"
     ext.arch_lifecycle_runtime_version = "1.0.3"
     ext.spinkit_version = "1.1.0"
-    ext.dagger_version = "2.12"
+    ext.dagger_version = "2.13"
     ext.anko_version = "0.10.3"
+    ext.mockwebserver_version = "3.8.1"
+    ext.mockito_version = "2.11.0"
+    ext.retrofit2_version = "2.3.0"
 
     repositories {
         google()

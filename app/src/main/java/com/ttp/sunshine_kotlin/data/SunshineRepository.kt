@@ -34,15 +34,15 @@ class SunshineRepository(weatherNetworkDataSource: WeatherNetworkDataSource, wea
         when (isInitialized) {
             true -> return
             false -> {
-                Log.d(LOG_TAG, "Initialize data")
+//                Log.d(LOG_TAG, "Initialize data")
                 isInitialized = true
 
                 mWeatherNetworkDataSource.mWeatherForecast.observeForever { t ->
                     t?.let {
                         bg {
-                            Log.d(LOG_TAG, "Delete old data")
+//                            Log.d(LOG_TAG, "Delete old data")
                             mWeatherDao.deleteOldData(SunshineDateUtils.getNormalizedUtcDateForToday())
-                            Log.d(LOG_TAG, "Insert ${it.size} entries")
+//                            Log.d(LOG_TAG, "Insert ${it.size} entries")
                             mWeatherDao.insert(it)
                         }
                     }
