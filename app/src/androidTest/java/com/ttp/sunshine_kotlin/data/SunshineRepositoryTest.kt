@@ -1,13 +1,11 @@
 package com.ttp.sunshine_kotlin.data
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.ttp.sunshine_kotlin.data.db.WeatherDao
 import com.ttp.sunshine_kotlin.data.db.WeatherEntry
 import com.ttp.sunshine_kotlin.data.network.WeatherApi
 import com.ttp.sunshine_kotlin.data.network.WeatherNetworkDataSource
-import com.ttp.sunshine_kotlin.data.network.WeatherResponse
 import com.ttp.sunshine_kotlin.util.TestUtil
 import com.ttp.sunshine_kotlin.utilities.SunshineDateUtils
 import org.hamcrest.CoreMatchers.`is`
@@ -19,9 +17,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import java.util.*
 
 /**
  * Created by Franz on 12/22/2017.

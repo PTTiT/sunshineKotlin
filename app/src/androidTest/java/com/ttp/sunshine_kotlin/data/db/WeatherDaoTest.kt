@@ -49,8 +49,6 @@ class WeatherDaoTest {
         val entryYesterday = WeatherEntry(3, yesterday, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
         val entries = arrayOf(entryYesterday, entryToday, entryTomorrow)
 
-//        val newObserver: Observer<Array<WeatherEntry>> = mock(Observer<Array<WeatherEntry>>::class.java)
-
         var count = mWeatherDao.countAllFutureForecast(today)
         assertEquals(0, count)
 
@@ -65,12 +63,9 @@ class WeatherDaoTest {
         val today = SunshineDateUtils.getNormalizedUtcDateForToday()
         val tomorrow = Date(SunshineDateUtils.getNormalizedUtcMsForToday() + SunshineDateUtils.DAY_IN_MILLIS)
         val yesterday = Date(SunshineDateUtils.getNormalizedUtcMsForToday() - SunshineDateUtils.DAY_IN_MILLIS)
-        val entryToday = WeatherEntry(1, today, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entryTomorrow = WeatherEntry(2, tomorrow, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entryYesterday = WeatherEntry(3, yesterday, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entries = arrayOf(entryYesterday, entryToday, entryTomorrow)
+        val entries = TestUtil.createTestWeatherResponse(3, yesterday.time)
 
-        mWeatherDao.insert(entries)
+        mWeatherDao.insert(entries.mWeatherForecast)
 
         val forecast = TestUtil.getValue(mWeatherDao.getWeatherForecastByDate(today))
         assertThat(forecast, notNullValue())
@@ -81,21 +76,17 @@ class WeatherDaoTest {
         assertThat(firstEntry, notNullValue())
         assertThat(secondEntry, notNullValue())
 
-        assertEquals(entryToday.date!!.time, firstEntry.date!!.time)
-        assertEquals(entryTomorrow.date!!.time, secondEntry.date!!.time)
+        assertEquals(today.time, firstEntry.date!!.time)
+        assertEquals(tomorrow.time, secondEntry.date!!.time)
     }
 
     @Test
     fun testGetWeatherByDate() {
         val today = SunshineDateUtils.getNormalizedUtcDateForToday()
-        val tomorrow = Date(SunshineDateUtils.getNormalizedUtcMsForToday() + SunshineDateUtils.DAY_IN_MILLIS)
         val yesterday = Date(SunshineDateUtils.getNormalizedUtcMsForToday() - SunshineDateUtils.DAY_IN_MILLIS)
-        val entryToday = WeatherEntry(1, today, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entryTomorrow = WeatherEntry(2, tomorrow, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entryYesterday = WeatherEntry(3, yesterday, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
-        val entries = arrayOf(entryYesterday, entryToday, entryTomorrow)
+        val entries = TestUtil.createTestWeatherResponse(3, yesterday.time)
 
-        mWeatherDao.insert(entries)
+        mWeatherDao.insert(entries.mWeatherForecast)
 
         val weather = TestUtil.getValue(mWeatherDao.getWeatherByDate(today))
         assertThat(weather, notNullValue())
