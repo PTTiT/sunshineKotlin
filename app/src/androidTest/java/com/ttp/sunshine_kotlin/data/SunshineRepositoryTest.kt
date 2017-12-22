@@ -1,6 +1,7 @@
 package com.ttp.sunshine_kotlin.data
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.ttp.sunshine_kotlin.data.db.WeatherDao
 import com.ttp.sunshine_kotlin.data.db.WeatherEntry
@@ -18,7 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.util.*
 
@@ -30,13 +31,13 @@ class SunshineRepositoryTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
+    lateinit var weatherApi: WeatherApi
+
     lateinit var weatherNetworkDataSource: WeatherNetworkDataSource
 
     @Mock
     lateinit var weatherDao: WeatherDao
-
-    @Mock
-    lateinit var weatherApi: WeatherApi
 
     lateinit var sunshineRespository: SunshineRepository
 
@@ -44,8 +45,6 @@ class SunshineRepositoryTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         weatherNetworkDataSource = WeatherNetworkDataSource(weatherApi)
-        val liveDataForecast = MutableLiveData<Array<WeatherEntry>>()
-        weatherNetworkDataSource.mWeatherForecast = liveDataForecast
         sunshineRespository = SunshineRepository(weatherNetworkDataSource, weatherDao)
     }
 
@@ -55,24 +54,38 @@ class SunshineRepositoryTest {
 
     @Test
     fun testGetWeatherForecast() {
-        val liveDataForecast = MutableLiveData<Array<WeatherEntry>>()
+        val roomData = MutableLiveData<Array<WeatherEntry>>()
         val today = SunshineDateUtils.getNormalizedUtcDateForToday()
+        val mockWeatherResponse = TestUtil.createTestWeatherResponse(10, today.time)
         `when`(weatherDao.countAllFutureForecast(today)).thenReturn(0)
-        `when`(weatherDao.getWeatherForecastByDate(today)).thenReturn(liveDataForecast)
-
-        val todayMs = SunshineDateUtils.getNormalizedUtcMsForToday()
-        val mockEntries = Array(5, {
-            WeatherEntry(it, Date(todayMs + it * SunshineDateUtils.DAY_IN_MILLIS), it * 1.0, it * 1.0, it * 1.0, it * 1.0, it * 1.0, it * 1.0)
-        })
-        val mockWeatherResponse = WeatherResponse(mockEntries)
+        `when`(weatherDao.getWeatherForecastByDate(today)).thenReturn(roomData)
         `when`(weatherApi.weatherForecast(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt())).thenReturn(TestUtil.successCall(mockWeatherResponse))
 
-        val data = TestUtil.getValue(sunshineRespository.getWeatherForecast(today))
+        `when`(weatherNetworkDataSource.fetchWeather()).thenReturn(ArgumentMatchers.any())
 
-//        val data = TestUtil.getValue(weatherNetworkDataSource.mWeatherForecast)
+
+        val data = TestUtil.getValue(weatherNetworkDataSource.mWeatherForecast)
+
         assertThat(data, notNullValue())
-        assertThat(data!!.size, `is`(5))
+        assertThat(data!!.size, `is`(10))
+        roomData.postValue(data)
 
-//        verify(weatherDao).insert(mockEntries)
+        val newData = TestUtil.getValue(sunshineRespository.getWeatherForecast(today))
+
+        assertThat(newData, notNullValue())
+        assertThat(newData!!.size, `is`(10))
+    }
+
+    @Test
+    fun testGetWeatherByDate() {
+        val roomData = MutableLiveData<WeatherEntry>()
+        val today = SunshineDateUtils.getNormalizedUtcDateForToday()
+        val todayWeatherEntry = WeatherEntry(1, today, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
+        `when`(weatherDao.getWeatherByDate(today)).thenReturn(roomData)
+        roomData.value = todayWeatherEntry
+
+        val data = TestUtil.getValue(sunshineRespository.getWeatherByDate(today))
+        assertThat(data, notNullValue())
+        assertThat(data!!.date?.time, `is`(today.time))
     }
 }
