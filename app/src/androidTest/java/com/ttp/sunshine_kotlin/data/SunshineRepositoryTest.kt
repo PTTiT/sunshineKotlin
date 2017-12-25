@@ -57,18 +57,14 @@ class SunshineRepositoryTest {
         `when`(weatherDao.countAllFutureForecast(today)).thenReturn(0)
         `when`(weatherDao.getWeatherForecastByDate(today)).thenReturn(roomData)
         `when`(weatherApi.weatherForecast(ArgumentMatchers.anyString(), ArgumentMatchers.anyInt())).thenReturn(TestUtil.successCall(mockWeatherResponse))
-
-        `when`(weatherNetworkDataSource.fetchWeather()).thenReturn(ArgumentMatchers.any())
-
+        `when`(weatherNetworkDataSource.fetchWeather()).thenReturn(null)
 
         val data = TestUtil.getValue(weatherNetworkDataSource.mWeatherForecast)
-
         assertThat(data, notNullValue())
         assertThat(data!!.size, `is`(10))
+
         roomData.postValue(data)
-
         val newData = TestUtil.getValue(sunshineRespository.getWeatherForecast(today))
-
         assertThat(newData, notNullValue())
         assertThat(newData!!.size, `is`(10))
     }
