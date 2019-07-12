@@ -42,8 +42,10 @@ class DetailViewModelTest {
         val liveData = MutableLiveData<WeatherEntry>()
         liveData.value = todayEntry
         `when`(sunshineRepository.getWeatherByDate(today)).thenReturn(liveData)
+
         detailViewModel.setDate(today)
         val data = TestUtil.getValue(detailViewModel.mWeather)
+
         assertThat(data, notNullValue())
         assertThat(data!!.date?.time, `is`(today.time))
     }
